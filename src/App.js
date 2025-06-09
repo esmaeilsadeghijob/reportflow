@@ -1,5 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
+import MainLayout from "./layout/MainLayout";
 import UploadReport from "./components/UploadReport";
 import ReportList from "./components/ReportList";
 import axios from "axios";
@@ -8,7 +9,6 @@ function App() {
     const [reports, setReports] = useState([]);
     const [previewUrl, setPreviewUrl] = useState("");
 
-    // دریافت لیست گزارش‌ها از سرور
     const fetchReports = async () => {
         try {
             const response = await axios.get("http://localhost:8080/api/reports/all");
@@ -22,7 +22,6 @@ function App() {
         fetchReports();
     }, []);
 
-    // تابع پیش‌نمایش که URL برای PDF تنظیم می‌کند
     const handlePreview = async (id) => {
         try {
             const response = await axios.get(`http://localhost:8080/api/reports/preview/${id}`, {
@@ -36,29 +35,24 @@ function App() {
     };
 
     return (
-        <div className="container">
-            {/* سمت چپ: نمایش پیش‌نمایش گزارش PDF */}
-            <div className="left-panel">
-                {previewUrl ? (
-                    <embed src={previewUrl} width="100%" height="100%" type="application/pdf" />
-                ) : (
-                    <div style={{ textAlign: "center", paddingTop: "20px" }}>
-                        پیش‌نمایش گزارش در اینجا نمایش داده می‌شود
-                    </div>
-                )}
+        <MainLayout>
+            <div className="container">
+                <div className="left-panel">
+                    {previewUrl ? (
+                        <embed src={previewUrl} width="100%" height="100%" type="application/pdf" />
+                    ) : (
+                        <div style={{ textAlign: "center", paddingTop: "20px" }}>
+                            پیش‌نمایش گزارش در اینجا نمایش داده می‌شود
+                        </div>
+                    )}
+                </div>
+                <div className="right-panel">
+                    <UploadReport onUploadSuccess={fetchReports} />
+                    <div style={{ marginTop: "20px" }}></div>
+                    <ReportList reports={reports} onDeleteSuccess={fetchReports} onPreview={handlePreview} />
+                </div>
             </div>
-            {/* سمت راست: آپلود گزارش جدید و لیست گزارش‌ها */}
-            <div className="right-panel">
-                <UploadReport onUploadSuccess={fetchReports} />
-                {/* ایجاد فاصله بین کامپوننت‌های آپلود و لیست */}
-                <div style={{ marginTop: "80px" }}></div>
-                <ReportList
-                    reports={reports}
-                    onDeleteSuccess={fetchReports}
-                    onPreview={handlePreview}
-                />
-            </div>
-        </div>
+        </MainLayout>
     );
 }
 
