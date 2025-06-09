@@ -41,7 +41,7 @@ function App() {
                     {previewUrl ? (
                         <embed src={previewUrl} width="100%" height="100%" type="application/pdf" />
                     ) : (
-                        <div style={{ textAlign: "center", paddingTop: "20px" }}>
+                        <div style={{ textAlign: "center", paddingTop: "20px" }} className="bnazanin-font">
                             پیش‌نمایش گزارش در اینجا نمایش داده می‌شود
                         </div>
                     )}

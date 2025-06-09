@@ -1,4 +1,3 @@
-// src/layout/PageHeader.js
 import React from 'react';
 
 const PageHeader = () => {
@@ -16,8 +15,8 @@ const PageHeader = () => {
                 zIndex: 1000,
             }}
         >
-            <h1 style={{ margin: 0 }}>مدیریت گزارشات جسپر - شرکت دانشوران سرمد</h1>
-            <p style={{ margin: '10px 0 0' }}>
+            <h1 style={{ margin: 0 }} className="lalezar-font">مدیریت گزارشات جسپر - شرکت دانشوران سرمد</h1>
+            <p style={{ margin: '10px 0 0' }} className="mjflow-font">
                 پلتفرمی برای پردازش و مدیریت گزارشات جسپر توسط شرکت دانشوران سرمد. وب‌سایت شرکت
             </p>
         </header>

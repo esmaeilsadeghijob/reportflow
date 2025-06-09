@@ -17,7 +17,7 @@ const ReportList = ({ reports, onDeleteSuccess, onPreview }) => {
 
     return (
         <div>
-            <h2 style={{ textAlign: "center" }}>لیست گزارش‌ها</h2>
+            <h2 style={{ textAlign: "center" }} className="entezar-font">لیست گزارش‌ها</h2>
             <List
                 bordered
                 dataSource={reports}

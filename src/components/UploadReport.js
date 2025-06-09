@@ -57,7 +57,7 @@ const UploadReport = ({ onUploadSuccess }) => {
     return (
         <Spin spinning={loading} tip="در حال آپلود...">
             <div style={{ marginBottom: "20px" }}>
-                <h2 style={{ textAlign: "center" }}>آپلود گزارش جدید</h2>
+                <h2 style={{ textAlign: "center" }} className="entezar-font">آپلود گزارش جدید</h2>
 
                 {/* دکمه انتخاب فایل، مرکز چین شده */}
                 <div style={{ textAlign: "center", marginTop: "10px" }}>

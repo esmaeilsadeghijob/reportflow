@@ -11,7 +11,7 @@ const PageFooter = () => {
                 backgroundColor: '#f9f9f9'
             }}
         >
-            <p>© {new Date().getFullYear()} شرکت دانشوران سرمد. کلیه حقوق محفوظ است.</p>
+            <p className="bnazanin-font">© {new Date().getFullYear()} شرکت دانشوران سرمد. کلیه حقوق محفوظ است </p>
         </footer>
     );
 };

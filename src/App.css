@@ -1,61 +1,110 @@
+@font-face {
+    font-family: 'Lalezar';
+    src: url('fonts/Lalezar-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'SOGAND';
+    src: url('fonts/SOGAND.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Entezar';
+    src: url('fonts/Entezar.v1.00.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'B-NAZANIN';
+    src: url('fonts/B-NAZANIN.TTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'Mj_Flow';
+    src: url('fonts/Mj_Flow Bold_0.ttf') format('truetype');
+}
+
+.lalezar-font {
+    font-family: 'Lalezar', sans-serif;
+}
+
+.sogand-font {
+    font-family: 'SOGAND', sans-serif;
+}
+
+.entezar-font {
+    font-family: 'Entezar', sans-serif;
+}
+
+.bnazanin-font {
+    font-family: 'B-NAZANIN', sans-serif;
+}
+
+.mjflow-font {
+    font-family: 'Mj_Flow', sans-serif;
+}
+
+body {
+    font-family: 'BNazanin', sans-serif;
+}
+
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .container {
-  display: flex;
-  height: 100vh; /* ارتفاع کامل صفحه */
+    display: flex;
+    height: 100vh; /* ارتفاع کامل صفحه */
 }
 
 .left-panel {
-  width: 60%; /* بخش سمت چپ 60 درصد از صفحه */
-  padding: 10px;
-  overflow-y: auto;
+    width: 60%; /* بخش سمت چپ 60 درصد از صفحه */
+    padding: 10px;
+    overflow-y: auto;
 }
 
 .right-panel {
-  width: 40%; /* بخش سمت راست 40 درصد از صفحه */
-  padding: 10px;
-  overflow-y: auto;
+    width: 40%; /* بخش سمت راست 40 درصد از صفحه */
+    padding: 10px;
+    overflow-y: auto;
 }
 
 
 .center-title {
-  text-align: center;
+    text-align: center;
 }
 
