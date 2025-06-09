@@ -50,6 +50,8 @@ function App() {
             {/* سمت راست: آپلود گزارش جدید و لیست گزارش‌ها */}
             <div className="right-panel">
                 <UploadReport onUploadSuccess={fetchReports} />
+                {/* ایجاد فاصله بین کامپوننت‌های آپلود و لیست */}
+                <div style={{ marginTop: "80px" }}></div>
                 <ReportList
                     reports={reports}
                     onDeleteSuccess={fetchReports}

@@ -37,25 +37,23 @@
   }
 }
 
-/* App.css */
 .container {
   display: flex;
-  flex-direction: row;
   height: 100vh; /* ارتفاع کامل صفحه */
 }
 
 .left-panel {
-  flex: 1; /* این قسمت پهنای قابل توجهی دارد */
+  width: 60%; /* بخش سمت چپ 60 درصد از صفحه */
   padding: 10px;
-  border-right: 1px solid #ddd;
   overflow-y: auto;
 }
 
 .right-panel {
-  width: 400px; /* یا هر مقدار دلخواه */
+  width: 40%; /* بخش سمت راست 40 درصد از صفحه */
   padding: 10px;
   overflow-y: auto;
 }
+
 
 .center-title {
   text-align: center;
