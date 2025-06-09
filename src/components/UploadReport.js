@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Upload, Button, Input, message } from "antd";
+import { Upload, Button, Input, message, Spin } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
 
@@ -9,6 +9,7 @@ const UploadReport = ({ onUploadSuccess }) => {
     const [reportCode, setReportCode] = useState("");
     const [file, setFile] = useState(null);
     const [uploadKey, setUploadKey] = useState(Date.now());
+    const [loading, setLoading] = useState(false);
 
     const uploadProps = {
         beforeUpload: (file) => {
@@ -18,7 +19,6 @@ const UploadReport = ({ onUploadSuccess }) => {
         onRemove: () => {
             setFile(null);
         },
-        // کنترل fileList برای نمایش فایل انتخاب شده
         fileList: file ? [file] : [],
     };
 
@@ -35,70 +35,75 @@ const UploadReport = ({ onUploadSuccess }) => {
         formData.append("reportCode", reportCode);
 
         try {
+            setLoading(true); // فعال کردن لودینگ قبل از شروع آپلود
             const response = await axios.post("http://localhost:8080/api/reports/upload", formData);
             message.success(response.data);
             if (onUploadSuccess) onUploadSuccess();
 
-            // پاک کردن مقادیر فرم پس از آپلود موفق
+            // پاکسازی مقادیر فرم پس از آپلود موفق
             setFile(null);
             setCid("");
             setSid("");
             setReportCode("");
-            // تغییر کلید Upload تا کامپوننت از نو رندر شود و فایل پاک شود
             setUploadKey(Date.now());
         } catch (error) {
             message.error("آپلود گزارش ناموفق بود.");
+            console.error(error);
+        } finally {
+            setLoading(false); // غیرفعال کردن لودینگ در هر صورت
         }
     };
 
     return (
-        <div style={{ marginBottom: "20px" }}>
-            <h2 style={{ textAlign: "center" }}>آپلود گزارش جدید</h2>
+        <Spin spinning={loading} tip="در حال آپلود...">
+            <div style={{ marginBottom: "20px" }}>
+                <h2 style={{ textAlign: "center" }}>آپلود گزارش جدید</h2>
 
-            {/* دکمه انتخاب فایل مرکز چین شده */}
-            <div style={{ textAlign: "center", marginTop: "10px" }}>
-                <Upload key={uploadKey} {...uploadProps}>
-                    <Button icon={<UploadOutlined />}>انتخاب فایل</Button>
-                </Upload>
-            </div>
+                {/* دکمه انتخاب فایل، مرکز چین شده */}
+                <div style={{ textAlign: "center", marginTop: "10px" }}>
+                    <Upload key={uploadKey} {...uploadProps}>
+                        <Button icon={<UploadOutlined />}>انتخاب فایل</Button>
+                    </Upload>
+                </div>
 
-            {/* ورودی‌های CID، SID، Report Code؛ قرارگیری به صورت عمودی */}
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    marginTop: "10px",
-                    gap: "8px",
-                }}
-            >
-                <Input
-                    placeholder="CID"
-                    value={cid}
-                    onChange={(e) => setCid(e.target.value)}
-                    style={{ width: "80%", maxWidth: "300px" }}
-                />
-                <Input
-                    placeholder="SID"
-                    value={sid}
-                    onChange={(e) => setSid(e.target.value)}
-                    style={{ width: "80%", maxWidth: "300px" }}
-                />
-                <Input
-                    placeholder="Report Code"
-                    value={reportCode}
-                    onChange={(e) => setReportCode(e.target.value)}
-                    style={{ width: "80%", maxWidth: "300px" }}
-                />
-            </div>
+                {/* ورودی‌های CID، SID و Report Code به صورت عمودی */}
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        marginTop: "10px",
+                        gap: "8px",
+                    }}
+                >
+                    <Input
+                        placeholder="CID"
+                        value={cid}
+                        onChange={(e) => setCid(e.target.value)}
+                        style={{ width: "80%", maxWidth: "300px" }}
+                    />
+                    <Input
+                        placeholder="SID"
+                        value={sid}
+                        onChange={(e) => setSid(e.target.value)}
+                        style={{ width: "80%", maxWidth: "300px" }}
+                    />
+                    <Input
+                        placeholder="Report Code"
+                        value={reportCode}
+                        onChange={(e) => setReportCode(e.target.value)}
+                        style={{ width: "80%", maxWidth: "300px" }}
+                    />
+                </div>
 
-            {/* دکمه آپلود گزارش مرکز چین شده */}
-            <div style={{ textAlign: "center", marginTop: "10px" }}>
-                <Button type="primary" onClick={handleUpload}>
-                    آپلود گزارش
-                </Button>
+                {/* دکمه آپلود گزارش، مرکز چین شده */}
+                <div style={{ textAlign: "center", marginTop: "10px" }}>
+                    <Button type="primary" onClick={handleUpload}>
+                        آپلود گزارش
+                    </Button>
+                </div>
             </div>
-        </div>
+        </Spin>
     );
 };
 
