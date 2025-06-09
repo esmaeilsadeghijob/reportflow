@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+/* App.css */
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh; /* ارتفاع کامل صفحه */
+}
+
+.left-panel {
+  flex: 1; /* این قسمت پهنای قابل توجهی دارد */
+  padding: 10px;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+}
+
+.right-panel {
+  width: 400px; /* یا هر مقدار دلخواه */
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.center-title {
+  text-align: center;
+}
+

@@ -1,51 +1,50 @@
-import React, { useState, useEffect } from "react";
-import { List, Button, message } from "antd";
+import React from "react";
+import { List, Button, message, Popconfirm } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 import axios from "axios";
 
-const ReportList = () => {
-    const [reports, setReports] = useState([]);
-    const [preview, setPreview] = useState(null);
-
-    useEffect(() => {
-        fetchReports();
-    }, []);
-
-    const fetchReports = async () => {
+const ReportList = ({ reports, onDeleteSuccess, onPreview }) => {
+    const handleDelete = async (id) => {
         try {
-            const response = await axios.get("http://localhost:8080/api/reports/all");
-            setReports(response.data);
-            console.log("Reports:", response.data); // بررسی خروجی داده‌ها در کنسول
+            await axios.delete(`http://localhost:8080/api/reports/${id}`);
+            message.success("گزارش با موفقیت حذف شد.");
+            if (onDeleteSuccess) onDeleteSuccess();
         } catch (error) {
-            message.error("دریافت لیست گزارش‌ها ناموفق بود.");
-        }
-    };
-
-    const handlePreview = async (id) => {
-        try {
-            const response = await axios.get(`http://localhost:8080/api/reports/preview/${id}`, { responseType: "blob" });
-            const file = new Blob([response.data], { type: "application/pdf" });
-            setPreview(URL.createObjectURL(file));
-        } catch (error) {
-            message.error("پیش‌نمایش ناموفق بود.");
+            message.error("حذف گزارش ناموفق بود.");
+            console.error("Error in deleting report:", error);
         }
     };
 
     return (
-        <div style={{ maxWidth: 600, margin: "20px auto" }}>
-            <h2>لیست گزارش‌ها</h2>
+        <div>
+            <h2 style={{ textAlign: "center" }}>لیست گزارش‌ها</h2>
             <List
                 bordered
                 dataSource={reports}
                 renderItem={(report) => (
                     <List.Item key={report.id}>
-                        گزارش شماره {report.reportCode}
-                        <Button onClick={() => handlePreview(report.id)} style={{ marginLeft: 10 }}>
-                            پیش‌نمایش
-                        </Button>
+                        <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
+                            <Popconfirm
+                                title="آیا مطمئن هستید که می‌خواهید حذف کنید؟"
+                                onConfirm={() => handleDelete(report.id)}
+                                okText="بله"
+                                cancelText="خیر"
+                            >
+                                <Button
+                                    type="link"
+                                    icon={<DeleteOutlined />}
+                                    danger
+                                    style={{ marginRight: 10 }}
+                                />
+                            </Popconfirm>
+                            <span style={{ flex: 1 }}>گزارش شماره {report.reportCode}</span>
+                            <Button onClick={() => onPreview(report.id)} style={{ marginLeft: 10 }}>
+                                پیش‌نمایش
+                            </Button>
+                        </div>
                     </List.Item>
                 )}
             />
-            {preview && <embed src={preview} width="600px" height="400px" />}
         </div>
     );
 };
