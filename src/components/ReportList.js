@@ -1,6 +1,6 @@
 import React from "react";
-import { List, Button, message, Popconfirm } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
+import { List, Button, message, Popconfirm, Tooltip } from "antd";
+import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 const ReportList = ({ reports, onDeleteSuccess, onPreview }) => {
@@ -23,24 +23,28 @@ const ReportList = ({ reports, onDeleteSuccess, onPreview }) => {
                 dataSource={reports}
                 renderItem={(report) => (
                     <List.Item key={report.id}>
-                        <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
-                            <Popconfirm
-                                title="آیا مطمئن هستید که می‌خواهید حذف کنید؟"
-                                onConfirm={() => handleDelete(report.id)}
-                                okText="بله"
-                                cancelText="خیر"
-                            >
-                                <Button
-                                    type="link"
-                                    icon={<DeleteOutlined />}
-                                    danger
-                                    style={{ marginRight: 10 }}
-                                />
-                            </Popconfirm>
-                            <span style={{ flex: 1 }}>گزارش شماره {report.reportCode}</span>
-                            <Button onClick={() => onPreview(report.id)} style={{ marginLeft: 10 }}>
-                                پیش‌نمایش
-                            </Button>
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
+                            <div style={{ display: "flex", alignItems: "center" }}>
+                                <Tooltip title="پیش‌نمایش">
+                                    <Button
+                                        type="link"
+                                        icon={<EyeOutlined />}
+                                        onClick={() => onPreview(report.id)}
+                                        style={{ marginRight: 10 }}
+                                    />
+                                </Tooltip>
+                                <Popconfirm
+                                    title="آیا مطمئن هستید که می‌خواهید حذف کنید؟"
+                                    onConfirm={() => handleDelete(report.id)}
+                                    okText="بله"
+                                    cancelText="خیر"
+                                >
+                                    <Button type="link" icon={<DeleteOutlined />} danger />
+                                </Popconfirm>
+                            </div>
+                            <span style={{ fontWeight: "bold", fontSize: "14px" }}>
+                                شماره گزارش: {report.reportCode}
+                            </span>
                         </div>
                     </List.Item>
                 )}
