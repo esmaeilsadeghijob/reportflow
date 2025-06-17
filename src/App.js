@@ -4,6 +4,7 @@ import MainLayout from "./layout/MainLayout";
 import UploadReport from "./components/UploadReport";
 import ReportList from "./components/ReportList";
 import axios from "axios";
+import CreateReport from "./components/CreateReport";
 
 function App() {
     const [reports, setReports] = useState([]);
@@ -48,6 +49,8 @@ function App() {
                 </div>
                 <div className="right-panel">
                     <UploadReport onUploadSuccess={fetchReports} />
+                    <div style={{ marginTop: "20px" }}></div>
+                    <CreateReport />
                     <div style={{ marginTop: "20px" }}></div>
                     <ReportList reports={reports} onDeleteSuccess={fetchReports} onPreview={handlePreview} />
                 </div>
