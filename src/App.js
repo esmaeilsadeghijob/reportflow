@@ -5,6 +5,8 @@ import UploadReport from "./components/UploadReport";
 import ReportList from "./components/ReportList";
 import axios from "axios";
 import CreateReport from "./components/CreateReport";
+import TemplateReport from "./components/TemplateReport";
+import JRXMLTemplate from "./components/JRXMLTemplate";
 
 function App() {
     const [reports, setReports] = useState([]);
@@ -40,9 +42,9 @@ function App() {
             <div className="container">
                 <div className="left-panel">
                     {previewUrl ? (
-                        <embed src={previewUrl} width="100%" height="100%" type="application/pdf" />
+                        <embed src={previewUrl} width="100%" height="100%" type="application/pdf"/>
                     ) : (
-                        <div style={{ textAlign: "center", paddingTop: "20px" }} className="bnazanin-font">
+                        <div style={{textAlign: "center", paddingTop: "20px"}} className="bnazanin-font">
                             پیش‌نمایش گزارش در اینجا نمایش داده می‌شود
                         </div>
                     )}
@@ -50,10 +52,16 @@ function App() {
                 <div className="right-panel">
                     <UploadReport onUploadSuccess={fetchReports} />
                     <div style={{ marginTop: "20px" }}></div>
+                    <JRXMLTemplate onTemplateCreated={fetchReports} />
+                    <div style={{ marginTop: "20px" }}></div>
+                    <TemplateReport onTemplateSelect={(template) => console.log("تمپلیت انتخاب‌شده:", template)} />
+                    <div style={{ marginTop: "20px" }}></div>
                     <CreateReport />
                     <div style={{ marginTop: "20px" }}></div>
                     <ReportList reports={reports} onDeleteSuccess={fetchReports} onPreview={handlePreview} />
                 </div>
+
+
             </div>
         </MainLayout>
     );

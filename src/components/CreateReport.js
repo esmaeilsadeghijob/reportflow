@@ -61,10 +61,12 @@ const CreateReport = () => {
         <div className="create-report-container">
             <h2 className="entezar-font">ایجاد گزارش جدید</h2>
             <Form layout="vertical" className="create-report-form">
-                <Form.Item label="نام گزارش">
-                    <Input value={reportName} onChange={(e) => setReportName(e.target.value)} />
+                <Form.Item>
+                    <p style={{textAlign: "right"}}>نام گزارش</p>
+                    <Input value={reportName} onChange={(e) => setReportName(e.target.value)}/>
                 </Form.Item>
-                <Form.Item label="فرمت خروجی">
+                <Form.Item>
+                    <p style={{textAlign: "right"}}>فرمت خروجی</p>
                     <Select value={selectedFormat} onChange={(value) => setSelectedFormat(value)}>
                         <Select.Option value="PDF">PDF</Select.Option>
                         <Select.Option value="XLS">Excel</Select.Option>
@@ -77,7 +79,8 @@ const CreateReport = () => {
                 {params.map((param, index) => (
                     <div key={index} className="param-row">
                         <Button type="link" danger onClick={() => handleDeleteParam(index)}>
-                            <DeleteOutlined />
+                            {/*<DeleteOutlined />*/}
+                            ❌
                         </Button>
                         <Input
                             placeholder="مقدار پارامتر"
