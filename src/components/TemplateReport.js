@@ -9,7 +9,8 @@ const TemplateReport = ({ onTemplateSelect }) => {
     useEffect(() => {
         const fetchTemplates = async () => {
             try {
-                const response = await api.get("/templates");
+                const response = await api.get("/all");
+                // const response = await api.get("/templates");
                 setTemplates(response.data);
             } catch (error) {
                 message.error("دریافت لیست تمپلیت‌ها ناموفق بود!");
@@ -39,16 +40,17 @@ const TemplateReport = ({ onTemplateSelect }) => {
             <Select
                 value={selectedTemplate}
                 onChange={(value) => setSelectedTemplate(value)}
-                style={{ width: "100%", marginBottom: "10px" }}
+                style={{ width: "40%", marginBottom: "10px" }}
                 placeholder="انتخاب تمپلیت"
             >
                 {templates.map((template) => (
-                    <Select.Option key={template.id} value={template.id}>
+                    <Select.Option key={template.id} value={template.id} className="variable-row-select-option">
                         {template.name}
                     </Select.Option>
                 ))}
             </Select>
-            <Button type="primary" onClick={handleSaveTemplate} style={{ width: "100%" }}>
+            <br/>
+            <Button type="primary" onClick={handleSaveTemplate} className="btn" style={{ marginTop: "10px", width: "30%"}}>
                 ذخیره تمپلیت
             </Button>
         </div>

@@ -128,6 +128,12 @@ body {
     text-align: center;
 }
 
+.uploadReportform {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+
 /* چیدمان نام و مقدار پارامتر در یک سطر */
 .param-row {
     display: flex;
@@ -178,7 +184,22 @@ body {
     margin-bottom: 10px;
 }
 
-.variable-row input {
-    flex: 1;
+.variable-row-select-option{
+    text-align: left;
 }
 
+.btn{
+    background-color: rgb(48, 48, 47);
+}
+
+input::placeholder {
+    text-align: right;
+}
+
+.ant-form-item {
+    margin-bottom: 5px !important;
+}
+
+.ant-message {
+    z-index: 99999 !important; /* Use !important to ensure override */
+}

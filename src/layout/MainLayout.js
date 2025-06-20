@@ -6,7 +6,8 @@ const MainLayout = ({ children }) => {
     return (
         <div>
             <PageHeader />
-            {/* تنظیم paddingTop برای ایجاد فاصله بین هدر و محتوای اصلی */}
+            {/* تنظیم paddingTop برای ایجاد فاصله بین هدر و محتو
+            ای اصلی */}
             <main style={{ paddingTop: '120px', minHeight: 'calc(100vh - 120px)' }}>
                 {children}
             </main>

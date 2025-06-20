@@ -40,6 +40,17 @@ function App() {
     return (
         <MainLayout>
             <div className="container">
+                <div className="right-panel">
+                    <UploadReport onUploadSuccess={fetchReports}/>
+                    <div style={{marginTop: "20px"}}></div>
+                    <JRXMLTemplate onTemplateCreated={fetchReports}/>
+                    <div style={{marginTop: "20px"}}></div>
+                    <TemplateReport onTemplateSelect={(template) => console.log("تمپلیت انتخاب‌شده:", template)}/>
+                    <div style={{marginTop: "20px"}}></div>
+                    <CreateReport/>
+                    <div style={{marginTop: "20px"}}></div>
+                    <ReportList reports={reports} onDeleteSuccess={fetchReports} onPreview={handlePreview}/>
+                </div>
                 <div className="left-panel">
                     {previewUrl ? (
                         <embed src={previewUrl} width="100%" height="100%" type="application/pdf"/>
@@ -49,19 +60,6 @@ function App() {
                         </div>
                     )}
                 </div>
-                <div className="right-panel">
-                    <UploadReport onUploadSuccess={fetchReports} />
-                    <div style={{ marginTop: "20px" }}></div>
-                    <JRXMLTemplate onTemplateCreated={fetchReports} />
-                    <div style={{ marginTop: "20px" }}></div>
-                    <TemplateReport onTemplateSelect={(template) => console.log("تمپلیت انتخاب‌شده:", template)} />
-                    <div style={{ marginTop: "20px" }}></div>
-                    <CreateReport />
-                    <div style={{ marginTop: "20px" }}></div>
-                    <ReportList reports={reports} onDeleteSuccess={fetchReports} onPreview={handlePreview} />
-                </div>
-
-
             </div>
         </MainLayout>
     );

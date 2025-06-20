@@ -61,13 +61,12 @@ const CreateReport = () => {
         <div className="create-report-container">
             <h2 className="entezar-font">ایجاد گزارش جدید</h2>
             <Form layout="vertical" className="create-report-form">
-                <Form.Item>
-                    <p style={{textAlign: "right"}}>نام گزارش</p>
+                <Form.Item label="نام گزارش">
                     <Input value={reportName} onChange={(e) => setReportName(e.target.value)}/>
                 </Form.Item>
-                <Form.Item>
-                    <p style={{textAlign: "right"}}>فرمت خروجی</p>
-                    <Select value={selectedFormat} onChange={(value) => setSelectedFormat(value)}>
+                <Form.Item label="فرمت خروج">
+                    {/*<p style={{textAlign: "right"}}>فرمت خروجی</p>*/}
+                    <Select value={selectedFormat} onChange={(value) => setSelectedFormat(value)} >
                         <Select.Option value="PDF">PDF</Select.Option>
                         <Select.Option value="XLS">Excel</Select.Option>
                         <Select.Option value="CSV">CSV</Select.Option>
@@ -78,19 +77,6 @@ const CreateReport = () => {
                 <h3>پارامترها</h3>
                 {params.map((param, index) => (
                     <div key={index} className="param-row">
-                        <Button type="link" danger onClick={() => handleDeleteParam(index)}>
-                            {/*<DeleteOutlined />*/}
-                            ❌
-                        </Button>
-                        <Input
-                            placeholder="مقدار پارامتر"
-                            value={param.value}
-                            onChange={(e) => {
-                                const updatedParams = [...params];
-                                updatedParams[index].value = e.target.value;
-                                setParams(updatedParams);
-                            }}
-                        />
                         <Input
                             placeholder="نام پارامتر"
                             value={param.name}
@@ -100,12 +86,25 @@ const CreateReport = () => {
                                 setParams(updatedParams);
                             }}
                         />
+                        <Input
+                            placeholder="مقدار پارامتر"
+                            value={param.value}
+                            onChange={(e) => {
+                                const updatedParams = [...params];
+                                updatedParams[index].value = e.target.value;
+                                setParams(updatedParams);
+                            }}
+                        />
+                        <Button type="link" danger onClick={() => handleDeleteParam(index)}>
+                            {/*<DeleteOutlined />*/}
+                            ❌
+                        </Button>
                     </div>
                 ))}
                 <Button type="dashed" onClick={handleAddParam} style={{ marginBottom: "10px", width: "100%" }}>
                     افزودن پارامتر جدید
                 </Button>
-                <Button type="primary" onClick={handleGenerateReport} style={{ width: "100%" }}>
+                <Button type="primary" onClick={handleGenerateReport} style={{ width: "50%" }}>
                     تولید گزارش
                 </Button>
             </Form>
