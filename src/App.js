@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import MainLayout from "./layout/MainLayout";
 import UploadReport from "./components/UploadReport";
 import ReportList from "./components/ReportList";
@@ -7,6 +7,7 @@ import axios from "axios";
 import CreateReport from "./components/CreateReport";
 import TemplateReport from "./components/TemplateReport";
 import JRXMLTemplate from "./components/JRXMLTemplate";
+import TemplateAndGenerateReport from "./components/TemplateAndGenerateReport";
 
 function App() {
     const [reports, setReports] = useState([]);
@@ -30,7 +31,7 @@ function App() {
             const response = await axios.get(`http://localhost:8080/api/reports/preview/${id}`, {
                 responseType: "blob",
             });
-            const file = new Blob([response.data], { type: "application/pdf" });
+            const file = new Blob([response.data], {type: "application/pdf"});
             setPreviewUrl(URL.createObjectURL(file));
         } catch (error) {
             console.error("مشکل در پیش‌نمایش گزارش:", error);
@@ -44,10 +45,12 @@ function App() {
                     <UploadReport onUploadSuccess={fetchReports}/>
                     <div style={{marginTop: "20px"}}></div>
                     <JRXMLTemplate onTemplateCreated={fetchReports}/>
+                    {/*<div style={{marginTop: "20px"}}></div>*/}
+                    {/*<TemplateReport onTemplateSelect={(template) => console.log("تمپلیت انتخاب‌شده:", template)}/>*/}
                     <div style={{marginTop: "20px"}}></div>
-                    <TemplateReport onTemplateSelect={(template) => console.log("تمپلیت انتخاب‌شده:", template)}/>
-                    <div style={{marginTop: "20px"}}></div>
-                    <CreateReport/>
+                    <TemplateAndGenerateReport/>
+                    {/*<div style={{marginTop: "20px"}}></div>*/}
+                    {/*<CreateReport/>*/}
                     <div style={{marginTop: "20px"}}></div>
                     <ReportList reports={reports} onDeleteSuccess={fetchReports} onPreview={handlePreview}/>
                 </div>

@@ -188,6 +188,10 @@ body {
     text-align: left;
 }
 
+.variable-row-select-option-center{
+    text-align: center;
+}
+
 .btn{
     background-color: rgb(48, 48, 47);
 }
@@ -202,4 +206,12 @@ input::placeholder {
 
 .ant-message {
     z-index: 99999 !important; /* Use !important to ensure override */
+}
+
+.label-left .ant-form-item-label > label {
+    text-align: left !important;
+}
+
+.uploadReportform .ant-form-item-label {
+    text-align: left !important;
 }
