@@ -8,6 +8,9 @@ import CreateReport from "./components/CreateReport";
 import TemplateReport from "./components/TemplateReport";
 import JRXMLTemplate from "./components/JRXMLTemplate";
 import TemplateAndGenerateReport from "./components/TemplateAndGenerateReport";
+import CreateReportTemplate from "./components/CreateReportTemplate";
+import UseReportTemplate from "./components/UseReportTemplate";
+import MainPage from "./layout/MainPage";
 
 function App() {
     const [reports, setReports] = useState([]);
@@ -39,10 +42,21 @@ function App() {
     };
 
     return (
+
+        // <MainPage>
+        //
+        // </MainPage>
+
         <MainLayout>
             <div className="container">
                 <div className="right-panel">
-                    <UploadReport onUploadSuccess={fetchReports}/>
+                    <div style={{marginTop: "20px"}}></div>
+                    <CreateReportTemplate/>
+                    <div style={{marginTop: "20px"}}></div>
+                    <UseReportTemplate/>
+
+
+                    {/*<UploadReport onUploadSuccess={fetchReports}/>*/}
                     <div style={{marginTop: "20px"}}></div>
                     <JRXMLTemplate onTemplateCreated={fetchReports}/>
                     {/*<div style={{marginTop: "20px"}}></div>*/}
